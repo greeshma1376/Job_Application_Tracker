@@ -1,5 +1,6 @@
 /**
  * Job & Internship Application Tracker - JavaScript AJAX Fetch Handler
+ * Features: AJAX Task Completion & Task Deletion
  */
 
 document.addEventListener('DOMContentLoaded', function() {
