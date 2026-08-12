@@ -4,13 +4,25 @@
 
 ---
 
+## 📸 Screenshots
+
+### Main Dashboard
+![Main Dashboard](docs/screenshots/dashboard.jpg)
+*The main dashboard shows all tracked applications with live statistics counters (Total, Pending, Completed), status badges, deadlines, and action buttons.*
+
+### Add New Application
+![Add Application Form](docs/screenshots/add_application.jpg)
+*The Add Application form allows users to submit a new job or internship opportunity with company name, details, and deadline.*
+
+---
+
 ## 🚀 Features
 
 - **Add Job & Internship Applications**: Easy-to-use HTML form to submit new applications with company name, role title, details, and application deadlines.
 - **View Applications Dashboard**: Overview of all tracked applications with live statistics counters (Total, Pending, Completed).
 - **Track Deadlines**: Clear display of deadlines formatted in `DD-MM-YYYY`.
 - **Mark Completed via AJAX**: Instant status updates from *Pending* to *Completed* using JavaScript `fetch()` without reloading the web page.
-- **Delete Applications**: Remove applications from both the SQLite database and the UI dynamically.
+- **Delete Applications**: Remove applications from both the SQLite database and the UI dynamically without page reload.
 - **CSRF Protection**: Native Django CSRF token integration across form submissions and AJAX requests.
 - **Responsive & Modern UI**: Built with CSS3 dark mode aesthetics, glassmorphism cards, Google Fonts (`Inter` & `Outfit`), and FontAwesome icons.
 
@@ -76,16 +88,14 @@ http://127.0.0.1:8000/
 
 ---
 
-## 📸 Screenshots Section
+## 🔗 URL Routes
 
-### Main Dashboard & Application List
-![Main Dashboard](docs/screenshots/dashboard.png)
-
-### Add Application Form
-![Add Application Form](docs/screenshots/add_application.png)
-
-### AJAX Completion & Deletion
-![AJAX Completion](docs/screenshots/ajax_completion.png)
+| URL | View | Description |
+|-----|------|-------------|
+| `/` | `task_list` | Main dashboard listing all applications |
+| `/add/` | `add_task` | Form page to add a new application |
+| `/complete/<id>/` | `complete_task` | AJAX POST endpoint to mark as completed |
+| `/delete/<id>/` | `delete_task` | AJAX POST endpoint to delete an application |
 
 ---
 
