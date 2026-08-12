@@ -1,0 +1,50 @@
+{% extends 'tracker/base.html' %}
+
+{% block title %}Add New Application - Job & Internship Tracker{% endblock %}
+
+{% block content %}
+<div class="form-container-wrapper">
+    <div class="form-card">
+        <div class="form-card-header">
+            <h2><i class="fa-solid fa-plus-circle"></i> Add New Application</h2>
+            <p>Enter details for a new job or internship opportunity you are tracking.</p>
+        </div>
+
+        <form method="POST" action="{% url 'add_task' %}" class="application-form">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="{{ form.title.id_for_label }}">
+                    <i class="fa-solid fa-building"></i> Company Name / Role Title
+                </label>
+                {{ form.title }}
+                <span class="help-text">Example: TCS - Software Developer, Infosys - Systems Engineer</span>
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.description.id_for_label }}">
+                    <i class="fa-solid fa-file-lines"></i> Application Details & Notes
+                </label>
+                {{ form.description }}
+                <span class="help-text">Mention job requirements, application link, or interview process notes.</span>
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.due_date.id_for_label }}">
+                    <i class="fa-solid fa-calendar-plus"></i> Application Deadline
+                </label>
+                {{ form.due_date }}
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="fa-solid fa-floppy-disk"></i> Save Application
+                </button>
+                <a href="{% url 'task_list' %}" class="btn btn-secondary btn-lg">
+                    <i class="fa-solid fa-arrow-left"></i> Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

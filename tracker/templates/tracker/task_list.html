@@ -1,0 +1,90 @@
+{% extends 'tracker/base.html' %}
+
+{% block title %}Applications List - Job & Internship Tracker{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <div class="header-title">
+        <h1>Job & Internship Applications</h1>
+        <p class="subtitle">Track deadlines, application status, and manage your career opportunities.</p>
+    </div>
+    <a href="{% url 'add_task' %}" class="btn btn-primary btn-lg">
+        <i class="fa-solid fa-plus-circle"></i> New Application
+    </a>
+</div>
+
+<!-- Stats Counter Grid -->
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-icon total"><i class="fa-solid fa-layer-group"></i></div>
+        <div class="stat-info">
+            <span class="stat-value" id="stat-total">{{ total_count }}</span>
+            <span class="stat-label">Total Applications</span>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon pending"><i class="fa-solid fa-clock"></i></div>
+        <div class="stat-info">
+            <span class="stat-value" id="stat-pending">{{ pending_count }}</span>
+            <span class="stat-label">Pending Review</span>
+        </div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon completed"><i class="fa-solid fa-circle-check"></i></div>
+        <div class="stat-info">
+            <span class="stat-value" id="stat-completed">{{ completed_count }}</span>
+            <span class="stat-label">Completed</span>
+        </div>
+    </div>
+</div>
+
+<!-- Applications Cards Container -->
+<div class="section-title">
+    <h2><i class="fa-solid fa-list-check"></i> Applications</h2>
+</div>
+
+<div class="cards-grid" id="applications-container">
+    {% for task in tasks %}
+    <div class="application-card {% if task.is_completed %}card-completed{% endif %}" id="task-card-{{ task.id }}">
+        <div class="card-header">
+            <h3 class="card-title">{{ task.title }}</h3>
+            <span class="status-badge {% if task.is_completed %}badge-completed{% else %}badge-pending{% endif %}" id="status-badge-{{ task.id }}">
+                {% if task.is_completed %}
+                    <i class="fa-solid fa-check"></i> Completed
+                {% else %}
+                    <i class="fa-solid fa-hourglass-half"></i> Pending
+                {% endif %}
+            </span>
+        </div>
+
+        <div class="card-body">
+            <p class="card-description">{{ task.description }}</p>
+            <div class="card-meta">
+                <span class="meta-item">
+                    <i class="fa-regular fa-calendar-days"></i>
+                    <strong>Deadline:</strong> {{ task.due_date|date:"d-m-Y" }}
+                </span>
+            </div>
+        </div>
+
+        <div class="card-actions">
+            {% if not task.is_completed %}
+            <button type="button" class="btn btn-success btn-mark-complete" data-id="{{ task.id }}" id="complete-btn-{{ task.id }}">
+                <i class="fa-solid fa-check-double"></i> Mark Complete
+            </button>
+            {% endif %}
+            <button type="button" class="btn btn-danger btn-delete-task" data-id="{{ task.id }}">
+                <i class="fa-solid fa-trash-can"></i> Delete
+            </button>
+        </div>
+    </div>
+    {% empty %}
+    <div class="empty-state" id="empty-state">
+        <i class="fa-solid fa-folder-open empty-icon"></i>
+        <h3>No Applications Found</h3>
+        <p>You haven't added any job or internship applications yet.</p>
+        <a href="{% url 'add_task' %}" class="btn btn-primary mt-3">Add Your First Application</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
