@@ -96,6 +96,20 @@ http://127.0.0.1:8000/
 | `/add/` | `add_task` | Form page to add a new application |
 | `/complete/<id>/` | `complete_task` | AJAX POST endpoint to mark as completed |
 | `/delete/<id>/` | `delete_task` | AJAX POST endpoint to delete an application |
+| `/api/posts/` | `PostViewSet` | REST API endpoint for blog posts (LIST & CREATE) |
+| `/api/posts/<id>/` | `PostViewSet` | REST API endpoint for blog posts (RETRIEVE, UPDATE & DELETE) |
+
+---
+
+## REST API
+The project includes a Django REST Framework API for blog posts.
+
+Endpoints:
+- GET /api/posts/ - List all posts
+- GET /api/posts/<id>/ - Retrieve a single post
+- POST /api/posts/ - Create a post
+- PUT /api/posts/<id>/ - Update a post
+- DELETE /api/posts/<id>/ - Delete a post
 
 ---
 
